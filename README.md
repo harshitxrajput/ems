@@ -1,12 +1,71 @@
-# React + Vite
+# Employee Management System (EMS)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React-based employee management system with task tracking capabilities.
 
-Currently, two official plugins are available:
+## Structure
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```
+src/
+├── context/
+│   └── AuthProvider.jsx      # Global context for auth and user data
+├── pages/
+│   ├── auth/
+│   │   └── Login.jsx        # Login page
+│   └── dashboard/
+│       ├── Admin.jsx        # Admin dashboard
+│       └── Employee.jsx     # Employee dashboard
+├── components/
+│   ├── TaskList/           # Task-related components
+│   └── other/             # Shared components
+└── utils/
+    └── LocalStorage.jsx    # Local storage management
+```
 
-## Expanding the ESLint configuration
+## Context API Implementation
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+The application uses React's Context API for global state management through `AuthProvider`:
+
+- Manages authentication state
+- Stores and provides access to:
+  - Employee data
+  - Admin data
+  - Current user session
+
+### Usage Example:
+```jsx
+const authData = useContext(AuthContext);
+// Access employee data: authData.employees
+// Access admin data: authData.admin
+```
+
+## Pages
+
+### Login Page
+- Handles both admin and employee authentication
+- Validates credentials against stored data
+- Routes to appropriate dashboard based on role
+
+### Admin Dashboard
+- Task creation interface
+- Employee task management
+- Overview of all tasks and their statuses
+
+### Employee Dashboard
+- Personal task list
+- Task status updates
+- Task statistics display
+
+## Task Management
+
+Tasks are categorized into:
+- New Tasks
+- Active Tasks
+- Completed Tasks
+- Failed Tasks
+
+Each task contains:
+- Title
+- Description
+- Due Date
+- Category
+- Status flags
